@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "196417559866",
+    "project_id": "aplikasi-chatting-da485",
+    "storage_bucket": "aplikasi-chatting-da485.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196417559866:android:90142d58a4817493514403",
+        "android_client_info": {
+          "package_name": "com.example.chattan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAluDIK1W0eva5DKnjRxe_cn4ZNvIsSxQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="biru">#64A2ED</color>
+    <color name="biruan">#296097</color>
+    <color name="ungu">#4641A6</color>
 </resources>
