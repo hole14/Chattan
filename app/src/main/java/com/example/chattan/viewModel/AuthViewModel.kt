@@ -1,34 +1,23 @@
 package com.example.chattan.viewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chattan.repository.AuthRepository
-import com.example.chattan.utils.Resource
 
-class AuthViewModel: ViewModel() {
-    private val repository = AuthRepository()
-
-    val authState = MutableLiveData<Resource<String>>()
+class AuthViewModel(private val repository: AuthRepository): ViewModel() {
+    private val _authResult = MutableLiveData<Pair<Boolean, String?>>()
+    val authResult: LiveData<Pair<Boolean, String?>> = _authResult
 
     fun register(username: String, email: String, password: String) {
-        authState.value = Resource.Loading()
-        repository.registerUser(email, password, username){ success, message ->
-            if (success) {
-                authState.value = Resource.Success(message)
-            } else {
-                authState.value = Resource.Error(message)
-            }
+        repository.register(username, email, password) { success, message ->
+            _authResult.value = Pair(success, message)
         }
     }
 
-    fun login(email:String, password: String) {
-        authState.value = Resource.Loading()
-        repository.loginUser(email, password) { success, message ->
-            if (success) {
-                authState.value = Resource.Success(message)
-            } else {
-                authState.value = Resource.Error(message)
-            }
+    fun login(email: String, password: String) {
+        repository.login(email, password) { success, message ->
+            _authResult.value = Pair(success, message)
         }
     }
 }

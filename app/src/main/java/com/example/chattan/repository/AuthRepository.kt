@@ -8,32 +8,29 @@ class AuthRepository {
     private val auth = FirebaseAuth.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
 
-    fun registerUser(email: String, password: String, username: String, onResult: (Boolean, String) -> Unit) {
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-            if (it.isSuccessful) {
-                val uid = auth.currentUser?.uid ?: ""
-                val user = User(uid, username, email, true)
-                firestore.collection("users").document(uid).set(user)
+    fun register(username: String, email: String, password: String, onResult: (Boolean, String?) -> Unit) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnSuccessListener { result ->
+                val userId = result.user?.uid ?: ""
+                val user = User(uid = userId, username = username, email = email)
+                firestore.collection("users").document(userId).set(user)
                     .addOnSuccessListener {
-                        onResult(true, "User registered successfully")
+                        onResult(true, null)
                     }
                     .addOnFailureListener{
-                        onResult(false, "Failed to save user")
+                        e -> onResult(false, e.message)
                     }
-            } else {
-                onResult(false, it.exception?.message ?: "Register failed")
+            } .addOnFailureListener{
+                e -> onResult(false, e.message)
             }
-        }
     }
-    fun loginUser(email: String, password: String, onResult: (Boolean, String) -> Unit) {
+
+    fun login(email: String, password: String, onResult: (Boolean, String?) -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    onResult(true, "Login successful")
-                } else {
-                    onResult(false, it.exception?.message ?: "Login failed")
-                }
+            .addOnSuccessListener {
+                onResult(true, null)
+            } .addOnFailureListener{
+                e -> onResult(false, e.message)
             }
     }
-    fun getCurrentUserId() = auth.currentUser?.uid
 }
