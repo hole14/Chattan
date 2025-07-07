@@ -1,6 +1,6 @@
 package com.example.chattan.model
 
-data class message (
+data class Message (
     val id: String = "",
     val senderId: String = "",
     val text: String = "",

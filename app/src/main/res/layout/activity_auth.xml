@@ -1,116 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:background="@drawable/bg_gradient">
+
     <LinearLayout
-        android:layout_width="350dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:layout_marginTop="30dp"
         android:background="@drawable/bg_tab"
-        android:layout_marginBottom="30dp"
-        android:padding="8dp">
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
         <Button
             android:id="@+id/btnTabLogin"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/login"
             android:drawableLeft="@drawable/ic_login"
+            android:text="@string/login"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:background="@drawable/bg_tab"/>
-        
+            android:backgroundTint="@color/biru"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
         <Space
             android:layout_width="8dp"
-            android:layout_height="1dp"/>
+            android:layout_height="1dp" />
 
         <Button
             android:id="@+id/btnTabRegister"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="@string/register"
-            android:drawableLeft="@drawable/ic_register"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:background="@drawable/bg_tab"/>
-    </LinearLayout>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        card_view:cardCornerRadius="20dp"
-        card_view:cardElevation="1dp"
-        android:backgroundTint="@android:color/transparent"
-        android:background="@android:color/transparent">
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp"
-            android:gravity="center">
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_register"
+            android:text="@string/register"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/titleLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_marginBottom="24dp"
-                android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/bg_login_register"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:ignore="MissingConstraints">
 
-            <EditText
-                android:id="@+id/edt_username"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:hint="@string/username"
-                android:background="@drawable/bg_input"
-                android:paddingHorizontal="14dp"
-                android:visibility="gone"
-                android:textColor="@color/black"
-                android:layout_marginBottom="10dp"/>
-            
-            <EditText
-                android:id="@+id/edt_email"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/black"
-                android:hint="@string/gmail"
-                android:background="@drawable/bg_input"
-                android:paddingHorizontal="14dp"
-                android:layout_marginBottom="10dp"/>
-            
-            <EditText
-                android:id="@+id/edt_password"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:textColor="@color/black"
-                android:hint="@string/password"
-                android:background="@drawable/bg_input"
-                android:paddingHorizontal="14dp"
-                android:inputType="textPassword"
-                android:layout_marginBottom="20dp"/>
-            
-            <Button
-                android:id="@+id/btnSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:text="@string/login"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:background="@drawable/bg_button"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+        <TextView
+            android:id="@+id/titleLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edt_username"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_input"
+            android:hint="@string/username"
+            android:paddingHorizontal="14dp"
+            android:textColor="@color/black"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_input"
+            android:hint="@string/gmail"
+            android:inputType="textEmailAddress"
+            android:paddingHorizontal="14dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_input"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:paddingHorizontal="14dp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="225dp"
+            android:layout_height="45dp"
+            android:backgroundTint="@color/ungu"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

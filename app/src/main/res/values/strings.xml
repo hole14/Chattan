@@ -5,6 +5,11 @@
     <string name="gmail">Gmail...</string>
     <string name="password">Password...</string>
     <string name="username">Username...</string>
+    <string name="silahkan_pilih_avatar_kamu">Silahkan pilih Avatar kamu</string>
+    <string name="simpan">Simpan</string>
+    <string name="explore">Explore</string>
+    <string name="friend">Friends</string>
+    <string name="search">Username...\n</string>
 
     <string-array name="avatar">
         <item>@drawable/avatar1</item>

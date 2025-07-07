@@ -53,6 +53,7 @@ dependencies {
 
     //glide
     implementation(libs.glide)
+    implementation(libs.circleimageview)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
