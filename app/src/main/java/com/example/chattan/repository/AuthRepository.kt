@@ -3,7 +3,6 @@ package com.example.chattan.repository
 import com.example.chattan.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.toObject
 
 class AuthRepository {
     private val auth = FirebaseAuth.getInstance()
@@ -48,8 +47,6 @@ class AuthRepository {
             .addOnSuccessListener { callback(true) }
             .addOnFailureListener { callback(false) }
     }
-
-    fun getCurrentUserUid(): String = auth.currentUser?.uid ?: ""
 
     fun getAllUsers(onResult: (List<User>) -> Unit) {
         firestore.collection("users")

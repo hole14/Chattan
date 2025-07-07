@@ -1,5 +1,6 @@
 package com.example.chattan.adapter
 
+import android.annotation.SuppressLint
 import android.view.Display.Mode
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,8 @@ import de.hdodenhof.circleimageview.CircleImageView
 class UserAdapter(
     private var userList: List<User>,
     private val mode: Mode,
-    private val onAddClick: ((User) -> Unit)? = null
+    private val onAddClick: ((User) -> Unit)? = null,
+    private var lastMessages: Map<String, String> = emptyMap()
 ) :
     RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -59,12 +61,14 @@ class UserAdapter(
             }
         } else if (mode == Mode.FRIENDS) {
             holder.tvDesk.visibility = View.VISIBLE
-            holder.tvDesk.text = "Lorem Ipsum"
+            holder.tvDesk.text = lastMessages[user.uid] ?: "Kirim pesan untuk memulai chat"
             holder.ivAddFriend.visibility = View.GONE
         }
     }
-    fun updateList(newList: List<User>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(newList: List<User>, messages: Map<String, String>) {
         userList = newList
+        lastMessages = messages
         notifyDataSetChanged()
     }
 }
