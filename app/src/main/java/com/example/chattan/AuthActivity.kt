@@ -1,6 +1,8 @@
 package com.example.chattan
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.provider.CalendarContract.Colors
@@ -21,6 +23,7 @@ import com.example.chattan.viewModel.AuthViewModel
 class AuthActivity : AppCompatActivity() {
     private lateinit var viewModel: AuthViewModel
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
@@ -37,6 +40,11 @@ class AuthActivity : AppCompatActivity() {
         val btnRegisterTab: Button = findViewById(R.id.btnTabRegister)
         val btnSubmit: Button = findViewById(R.id.btnSubmit)
 
+        val colorBiru = ContextCompat.getColor(this, R.color.biru)
+        val colorTransparan = ContextCompat.getColor(this, android.R.color.transparent)
+        btnLoginTab.backgroundTintList = ColorStateList.valueOf(colorBiru)
+        btnRegisterTab.backgroundTintList = ColorStateList.valueOf(colorTransparan)
+
         var isLogin = true
 
         btnLoginTab.setOnClickListener {
@@ -44,16 +52,16 @@ class AuthActivity : AppCompatActivity() {
             title.text = getString(R.string.login)
             btnSubmit.text = getString(R.string.login)
             etUsername.visibility = View.GONE
-            btnLoginTab.setBackgroundColor(ContextCompat.getColor(this, R.color.biru))
-            btnRegisterTab.setBackgroundColor(Color.TRANSPARENT)
+            btnLoginTab.backgroundTintList = ColorStateList.valueOf(colorBiru)
+            btnRegisterTab.backgroundTintList = ColorStateList.valueOf(colorTransparan)
         }
         btnRegisterTab.setOnClickListener {
             isLogin = false
             title.text = getString(R.string.register)
             btnSubmit.text = getString(R.string.register)
             etUsername.visibility = View.VISIBLE
-            btnLoginTab.setBackgroundColor(Color.TRANSPARENT)
-            btnRegisterTab.setBackgroundColor(ContextCompat.getColor(this, R.color.biru))
+            btnLoginTab.backgroundTintList = ColorStateList.valueOf(colorTransparan)
+            btnRegisterTab.backgroundTintList = ColorStateList.valueOf(colorBiru)
         }
 
         btnSubmit.setOnClickListener {

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.chattan.repository.AuthRepository
 import com.example.chattan.viewModel.AuthViewModel
 import com.google.firebase.auth.FirebaseAuth
+import de.hdodenhof.circleimageview.CircleImageView
 
 class AvatarActivity : AppCompatActivity() {
     private lateinit var viewModel: AuthViewModel
@@ -21,7 +22,7 @@ class AvatarActivity : AppCompatActivity() {
         val repository = AuthRepository()
         viewModel = AuthViewModel(repository)
 
-        val ivSelectedAvatar: ImageView = findViewById(R.id.ivSelectedAvatar)
+        val ivSelectedAvatar: CircleImageView = findViewById(R.id.ivSelectedAvatar)
         val gridAvatar: GridLayout = findViewById(R.id.grid_avatar)
         val btnSimpan: Button = findViewById(R.id.btnSimpan)
 
@@ -30,7 +31,7 @@ class AvatarActivity : AppCompatActivity() {
 
         avatars.forEach { avatarName ->
             val resId = resources.getIdentifier(avatarName, "drawable", packageName)
-            val iv = ImageView(this)
+            val iv = CircleImageView(this)
             iv.setImageResource(resId)
             val params = GridLayout.LayoutParams()
             params.height = 120
@@ -47,8 +48,13 @@ class AvatarActivity : AppCompatActivity() {
         }
 
         btnSimpan.setOnClickListener {
+            if (selectedAvatar == null) {
+                Toast.makeText(this, "Silahkan pilih Avatar kamu", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val uid = FirebaseAuth.getInstance().currentUser?.uid
-            if (uid != null && selectedAvatar != null) {
+            if (uid != null) {
                 viewModel.saveAvatar(uid)
             }
         }

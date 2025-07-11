@@ -1,13 +1,14 @@
 package com.example.chattan.adapter
 
 import android.annotation.SuppressLint
-import android.view.Display.Mode
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.chattan.ChatActivity
 import com.example.chattan.R
 import com.example.chattan.model.User
 import com.google.firebase.auth.FirebaseAuth
@@ -63,6 +64,15 @@ class UserAdapter(
             holder.tvDesk.visibility = View.VISIBLE
             holder.tvDesk.text = lastMessages[user.uid] ?: "Kirim pesan untuk memulai chat"
             holder.ivAddFriend.visibility = View.GONE
+        }
+        holder.itemView.setOnClickListener{
+            if (mode == Mode.FRIENDS) {
+                val intent = Intent(context, ChatActivity::class.java)
+                intent.putExtra("friend_uid", user.uid)
+                intent.putExtra("friend_username", user.username)
+                intent.putExtra("friend_avatar", user.avatar)
+                context.startActivity(intent)
+            }
         }
     }
     @SuppressLint("NotifyDataSetChanged")

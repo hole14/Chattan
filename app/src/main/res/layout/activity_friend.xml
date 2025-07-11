@@ -26,8 +26,7 @@
             android:text="@string/explore"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:drawableLeft="@drawable/ic_explore"
-            android:backgroundTint="@color/biru"/>
+            android:drawableLeft="@drawable/ic_explore"/>
         <Space
             android:layout_width="8dp"
             android:layout_height="1dp"/>
@@ -40,8 +39,7 @@
             android:text="@string/friend"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:drawableLeft="@drawable/ic_friend"
-            android:backgroundTint="@android:color/transparent"/>
+            android:drawableLeft="@drawable/ic_friend"/>
     </LinearLayout>
     
     <LinearLayout
@@ -51,20 +49,22 @@
         android:orientation="horizontal"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="12dp"
-        android:paddingTop="18dp"
+        android:paddingVertical="5dp"
         android:background="@drawable/bg_input">
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_gravity="center"
             android:src="@drawable/ic_search"
             android:layout_marginEnd="12dp"/>
         <EditText
             android:id="@+id/edtSearch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="14sp"
             android:hint="@string/search"
             android:textColor="@color/black"
-            android:background="android:color/transparent"/>
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

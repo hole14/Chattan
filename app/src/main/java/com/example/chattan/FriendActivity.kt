@@ -1,10 +1,13 @@
 package com.example.chattan
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,6 +41,11 @@ class FriendActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.rvFriend)
         val search: EditText = findViewById(R.id.edtSearch)
 
+        val colorBiru = ContextCompat.getColor(this, R.color.biru)
+        val colorTransparan = ContextCompat.getColor(this, android.R.color.transparent)
+        btnExplore.backgroundTintList = ColorStateList.valueOf(colorBiru)
+        btnFriends.backgroundTintList = ColorStateList.valueOf(colorTransparan)
+
         val factory = AuthFactory(AuthRepository())
         viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
 
@@ -57,15 +65,15 @@ class FriendActivity : AppCompatActivity() {
         btnExplore.setOnClickListener {
             currentMode = UserAdapter.Mode.EXPLORE
             viewModel.getAllUsers()
-            btnExplore.setBackgroundColor(resources.getColor(R.color.biru))
-            btnFriends.setBackgroundColor(Color.TRANSPARENT)
+            btnExplore.backgroundTintList = ColorStateList.valueOf(colorBiru)
+            btnFriends.backgroundTintList = ColorStateList.valueOf(colorTransparan)
         }
 
         btnFriends.setOnClickListener {
             currentMode = UserAdapter.Mode.FRIENDS
             viewModel.getAllUsers()
-            btnFriends.setBackgroundColor(resources.getColor(R.color.biru))
-            btnExplore.setBackgroundColor(Color.TRANSPARENT)
+            btnExplore.backgroundTintList = ColorStateList.valueOf(colorTransparan)
+            btnFriends.backgroundTintList = ColorStateList.valueOf(colorBiru)
         }
 
         search.addTextChangedListener {
@@ -76,11 +84,17 @@ class FriendActivity : AppCompatActivity() {
         viewModel.userList.observe(this) { user ->
             allUsers = user.filter { it.uid != myUid }
             filterAndUpdate(search.text.toString())
+            Log.d("DebugUserList", "Jumlah user setelah filter (tanpa saya): ${allUsers.size}")
         }
     }
 
     private fun filterAndUpdate(query: String) {
         val filtered = allUsers.filter { it.username.contains(query, ignoreCase = true) }
+
+        Log.d("DebugUserList", "Jumlah user setelah search: ${filtered.size}")
+        for (user in filtered) {
+            Log.d("DebugUserList", "User ditemukan: ${user.username}, UID: ${user.uid}")
+        }
 
         if (currentMode == UserAdapter.Mode.EXPLORE) {
             adapter.updateList(filtered, emptyMap())
